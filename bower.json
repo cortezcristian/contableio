@@ -3,7 +3,11 @@
   "description": "Software Contable",
   "main": "index.js",
   "authors": [
-    "[object Object]"
+		{
+			"name": "Cristian Cortez",
+			"email": "cortez.cristian@gmail.com",
+			"url": "contable.io"
+		}
   ],
   "license": "MIT",
   "keywords": [
