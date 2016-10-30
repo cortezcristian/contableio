@@ -95,6 +95,10 @@
       <footer></footer>
       </div>
     </div>
+    <!-- See:
+    https://github.com/electron/electron/issues/254
+    -->
+    <script>window.$ = window.jQuery = require('./components/jquery/dist/jquery.js');</script>
     <!-- bower:js -->
     <script src="components/jquery/dist/jquery.js"></script>
     <script src="components/angular/angular.js"></script>
