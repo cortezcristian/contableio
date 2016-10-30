@@ -12,7 +12,7 @@ branches:
     - master
 
 script:
-  - sh ./scripts/travis-build.sh
+  - bash ./scripts/travis-build.sh
 
 cache:
   directories:
