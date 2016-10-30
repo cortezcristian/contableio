@@ -20,7 +20,17 @@ angular
     'datetimepicker',
     'ui.bootstrap'
   ])
-  .config(function ($stateProvider, $locationProvider, uiSelectConfig, datetimepickerProvider, hotkeysProvider, toastrConfig) {
-		debugger;
+  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, uiSelectConfig, datetimepickerProvider, hotkeysProvider, toastrConfig) {
+		$stateProvider
+			.state({
+				name: 'empresas',
+				url: '/empresas',
+				templateUrl: 'views/empresas.html'
+			});
+		$urlRouterProvider.otherwise('/empresas');
+	})
+	.run(function($rootScope){
+
+		$rootScope.main_app = "Sample";
 	});
 
