@@ -18,5 +18,8 @@
     "components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "Winstrap": "winstrap#^0.5.10"
+  }
 }

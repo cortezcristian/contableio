@@ -9,7 +9,7 @@ fi
 node --version
 npm --version
 
-npm install -g mocha
+npm install -g mocha electron-packager
 npm install
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]
 then
