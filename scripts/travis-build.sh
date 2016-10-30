@@ -13,7 +13,7 @@ npm install -g mocha
 npm install
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
 	electron-packager . --out=dist --asar --overwrite --platform=linux
-elif
+else
 	electron-packager . --out=dist --asar --overwrite --platform=darwin
 fi
 npm test
