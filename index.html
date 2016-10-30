@@ -1,6 +1,6 @@
 <!doctype html>
 <html>
-  <head>
+  <head ng-app="contableio">
     <meta charset="utf-8">
     <title>Electron boilerplate</title>
     <!-- bower:css -->
@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="components/angular-toggle-switch/angular-toggle-switch.css" />
     <link rel="stylesheet" href="components/perfect-scrollbar/css/perfect-scrollbar.css" />
     <link rel="stylesheet" href="components/angular-toastr/dist/angular-toastr.css" />
+    <link rel="stylesheet" href="components/angular-hotkeys/build/hotkeys.css" />
     <link rel="stylesheet" href="components/angular-ui-grid/ui-grid.css" />
     <link rel="stylesheet" href="components/angular-ui-grid/ui-grid.min.css" />
     <link rel="stylesheet" href="components/angular-ui-select/dist/select.css" />
@@ -101,6 +102,7 @@
     <script>window.$ = window.jQuery = require('./components/jquery/dist/jquery.js');</script>
     <!-- bower:js -->
     <script src="components/jquery/dist/jquery.js"></script>
+    <script src="components/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
     <script src="components/angular/angular.js"></script>
     <script src="components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="components/underscore/underscore.js"></script>
@@ -115,8 +117,7 @@
     <script src="components/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
     <script src="components/perfect-scrollbar/js/perfect-scrollbar.js"></script>
     <script src="components/angular-toastr/dist/angular-toastr.tpls.js"></script>
-    <script src="components/angular-hotkeys/angular-hotkeys.js"></script>
-    <script src="components/angular-hotkeys/angular-hotkeys.min.js"></script>
+    <script src="components/angular-hotkeys/build/hotkeys.js"></script>
     <script src="components/angular-ui-grid/ui-grid.js"></script>
     <script src="components/angular-ui-grid/ui-grid.min.js"></script>
     <script src="components/angular-ui-select/dist/select.js"></script>
@@ -125,5 +126,6 @@
     <script src="components/pdfmake/build/pdfmake.js"></script>
     <script src="components/pdfmake/build/vfs_fonts.js"></script>
     <!-- endbower -->
+		<script src="src/app.js"></script>
   </body>
 </html>
