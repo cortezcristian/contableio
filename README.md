@@ -1,4 +1,4 @@
-# contableio
+# contableio [![Build Status](https://travis-ci.org/cortezcristian/contableio.svg?branch=master)](https://travis-ci.org/cortezcristian/contableio)
 
 Software Contable
 
