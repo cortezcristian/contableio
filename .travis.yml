@@ -11,7 +11,8 @@ branches:
   only:
     - master
 
-script: ./scripts/travis-build.sh
+script:
+  - sh ./scripts/travis-build.sh
 
 cache:
   directories:
