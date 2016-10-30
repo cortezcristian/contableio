@@ -11,4 +11,5 @@ npm --version
 
 npm install -g mocha
 npm install
+npm run build
 npm test
