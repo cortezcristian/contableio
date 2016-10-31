@@ -27,7 +27,9 @@
     "electron"
   ],
   "dependencies": {
-    "electron-debug": "^1.0.0"
+    "electron-debug": "^1.0.0",
+    "sequelize": "^3.24.6",
+    "sqlite3": "^3.1.8"
   },
   "devDependencies": {
     "bower": "^1.7.9",
