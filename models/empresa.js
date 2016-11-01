@@ -1,6 +1,11 @@
 var Sequelize = require('sequelize');
 var sequelize = module.parent.exports.sequelize;
 
+if(typeof sequelize === 'undefined') {
+	// Require connetion
+	console.log("Require connection");
+}
+
 var Empresa = sequelize.define('Empresa', {
 	idEmpresa : { type            : Sequelize.INTEGER, primaryKey : true, autoIncrement : true },
   nombre     : Sequelize.STRING,

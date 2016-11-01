@@ -21,7 +21,7 @@
   </head>
   <body ng-app="contableio">
     <div class="container-fluid" style="padding:0">
-			<nav class="navbar navbar-default">
+      <nav class="navbar navbar-default">
 <!-- nav bar starts -->
         <div class="navbar-global theme-default">
             <div class="container-fluid">
@@ -32,7 +32,7 @@
                     </button>
 
                     <a href="#" class="navbar-brand">
-												Contable.IO
+                        Contable.IO
                     </a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -91,12 +91,12 @@
             </div>
         </div>
 <!-- nav bar ends -->
-			</nav>
+      </nav>
       <header>
       </header>
       <section class="main">
-				<div ui-view></div>
-			</section>
+        <div ui-view></div>
+      </section>
       <footer></footer>
       </div>
     </div>
@@ -130,6 +130,9 @@
     <script src="components/pdfmake/build/pdfmake.js"></script>
     <script src="components/pdfmake/build/vfs_fonts.js"></script>
     <!-- endbower -->
-		<script src="src/app.js"></script>
+    <script>require('./conn.js');</script>
+    <script src="src/app.js"></script>
+    <script src="src/services/empresas.js"></script>
+    <script src="src/controllers/empresas.js"></script>
   </body>
 </html>
