@@ -18,6 +18,7 @@ describe('application launch', function () {
       path: path_bar
     });
     console.log("About to return", path_bar);
+    console.log("See __dirname", __dirname);
     return app.start();
   })
 
