@@ -13,7 +13,7 @@ describe('application launch', function () {
 
   beforeEach(function (done) {
     console.log("Before each starts", process.cwd());
-    var path_bar = './dist/Contableio-'+platform_name+'-x64/Contableio' + ( (platform_name === 'darwin') ? '.app/Contents/MacOS/Contableio' : '' );
+    var path_bar = process.cwd()+'/dist/Contableio-'+platform_name+'-x64/Contableio' + ( (platform_name === 'darwin') ? '.app/Contents/MacOS/Contableio' : '' );
     app = new Application({
       path: path_bar
     });
