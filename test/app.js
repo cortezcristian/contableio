@@ -21,6 +21,11 @@ describe('application launch', function () {
     console.log("See __dirname", __dirname);
     app.start().then(function () {
       done();
+    })
+    .catch(function (error) {
+      // Log any failures
+      console.error('Test failed', error.message)
+      done(error);
     });
   })
 
