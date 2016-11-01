@@ -4,7 +4,6 @@ if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
   export DISPLAY=:99.0
   sh -e /etc/init.d/xvfb start
   sleep 3
-  sudo apt-get install tree
 fi
 
 node --version
@@ -15,10 +14,9 @@ npm install
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]
 then
   electron-packager . --out=dist --asar --overwrite --platform=linux
+	ls dist/Contableio-linux-x64
 else
   electron-packager . --out=dist --asar --overwrite --platform=darwin
 fi
-
-tree dist
 
 npm test
