@@ -20,6 +20,7 @@ describe('application launch', function () {
     console.log("About to return", path_bar);
     console.log("See __dirname", __dirname);
     app.start().then(function () {
+			console.log("Successfully started!");
       done();
     })
     .catch(function (error) {
