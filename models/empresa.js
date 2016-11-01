@@ -4,6 +4,8 @@ var sequelize = module.parent.exports.sequelize;
 if(typeof sequelize === 'undefined') {
 	// Require connetion
 	console.log("Require connection");
+	var remote = require('electron').remote;
+	sequelize = remote.getGlobal('sequelize');
 }
 
 var Empresa = sequelize.define('Empresa', {

@@ -2,8 +2,8 @@
 
 angular
   .module('contableio')
-	.controller('EmpresasCtrl', function($scope, EmprensasServ){
-		EmprensasServ.create("Sample Empresa");
+	.controller('EmpresasCtrl', function($scope, EmpresasServ){
+		EmpresasServ.create("Sample Empresa");
 	});
 
 })();

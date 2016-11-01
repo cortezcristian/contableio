@@ -21,10 +21,11 @@ function createMainWindow() {
 		height: 600
 	});
 
-	var sequelize = exports.sequelize = require('./conn.js');
+	global.sequelize = exports.sequelize = require('./conn.js');
 
 	win.loadURL(`file://${__dirname}/index.html`);
 	win.on('closed', onClosed);
+	win.openDevTools();
 
 	return win;
 }

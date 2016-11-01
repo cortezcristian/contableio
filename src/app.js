@@ -25,6 +25,7 @@ angular
 			.state({
 				name: 'empresas',
 				url: '/empresas',
+				controller: 'EmpresasCtrl',
 				templateUrl: 'views/empresas.html'
 			});
 		$urlRouterProvider.otherwise('/empresas');
