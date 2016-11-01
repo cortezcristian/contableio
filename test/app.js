@@ -11,7 +11,7 @@ describe('application launch', function () {
   this.timeout(1*60/6*1000)
   var app;
 
-  beforeEach(function () {
+  beforeEach(function (done) {
     console.log("Before each starts", process.cwd());
     var path_bar = './dist/Contableio-'+platform_name+'-x64/Contableio' + ( (platform_name === 'darwin') ? '.app/Contents/MacOS/Contableio' : '' );
     app = new Application({
@@ -19,7 +19,9 @@ describe('application launch', function () {
     });
     console.log("About to return", path_bar);
     console.log("See __dirname", __dirname);
-    return app.start();
+    app.start().then(function () {
+      done();
+    });
   })
 
   afterEach(function () {
@@ -28,9 +30,10 @@ describe('application launch', function () {
     }
   })
 
-  it('shows an initial window', function () {
-    return app.client.getWindowCount().then(function (count) {
+  it('shows an initial window', function (done) {
+    app.client.getWindowCount().then(function (count) {
       assert.equal(count, 1);
+      done();
     })
   })
 })
