@@ -48,7 +48,6 @@
     "pdfmake": "^0.1.20"
   },
   "resolutions": {
-    "angular": ">=1.4.0",
-    "angular-hotkeys": "^1.7.0"
+    "angular": ">=1.4.0"
   }
 }
