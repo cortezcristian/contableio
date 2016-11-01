@@ -3,7 +3,7 @@ var assert = require('assert');
 
 var platform_name = process.platform.match(/win/) ? process.platform : 'linux';
 
-if(platform_name.match(/darwin|linux/)) {
+if(platform_name.match(/darwin/)) {
 // Only run this on Mac
 // dropped linux due timeouts
 // Ideas: screen size, initialization, build, squlite3 as async
@@ -24,40 +24,10 @@ describe('application launch', function () {
     });
     console.log("About to return", path_bar);
     console.log("See __dirname", __dirname);
-		app.start()
-    .then(() => app.browserWindow.isVisible())
-    .then((isVisible) => console.log('Main window is visible: ', isVisible))
-    .then(() => {
-        console.log('Checking text...')
-        return app.client.getText('body')
-    })
-    .then((text) => {
-        console.log(text, "Does this work?")
-        console.log("Text: ", text)
-    })
-    .then(() => {
-        console.log('Checking the windows title...')
-        return app.client.getTitle()
-    })
-    .then((title) => {
-        console.log("Title: ", title)
-    })
-    .then(() => {
-        console.log("Successfully started!");
-        done();
-    })
-    .catch((error) => {
-        // Log any failures
-        console.error('Test failed', error.message)
-        done(error);
-        console.log('Stopping the application')
-        return app.stop()
-    })
-		/*
     app.start()
       .then(function () {
         // Check if the window is visible
-        return
+				return app.browserWindow.isVisible();
       }).then(function (isVisible) {
         // Verify the window is visible
         console.log("Is visible?", isVisible)
@@ -77,7 +47,6 @@ describe('application launch', function () {
         console.error('Test failed', error.message)
         done(error);
       });
-		*/
   })
 
   afterEach(function () {
