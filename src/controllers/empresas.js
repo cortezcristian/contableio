@@ -2,7 +2,9 @@
 
 angular
   .module('contableio')
-  .controller('EmpresasCtrl', function($scope, $timeout, $location, EmpresasServ){
+  .controller('EmpresasCtrl', function($scope, $timeout, $location, $log, EmpresasServ){
+	  // unselect checked
+	  $scope.multipleSelected=0;
 
     $scope.gridOptions = {
       paginationPageSizes: [25, 50, 75, 2000],
@@ -49,6 +51,82 @@ angular
         $location.path('/empresas-edit/'+row.entity._id);
       }, 1000)
     };
+
+		// Api Starts
+   $scope.gridOptions.onRegisterApi = function(gridApi){
+      //set gridApi on scope
+      $scope.gridApi = gridApi;
+      gridApi.selection.on.rowSelectionChanged($scope,function(row){
+        var msg = 'row selected ' + row.isSelected;
+        $log.log(msg);
+        if(row.isSelected) {
+            $scope.multipleSelected++;
+        } else {
+            $scope.multipleSelected--;
+        }
+      });
+
+      gridApi.selection.on.rowSelectionChangedBatch($scope,function(rows){
+        var msg = 'rows changed ' + rows.length;
+        $log.log(msg);
+        if(rows[0].isSelected){
+            $scope.multipleSelected += rows.length;
+        } else {
+            $scope.multipleSelected -= rows.length;
+        }
+      });
+
+      // External Filtering
+      // http://ui-grid.info/docs/#/tutorial/308_external_filtering
+      $scope.gridApi.core.on.filterChanged( $scope, function() {
+        var grid = this.grid;
+
+        // Go to 1st page
+        grid.options.paginationCurrentPage = 1;
+        // Sort Global Config
+
+        $scope.getPage(
+            grid.options.paginationPageSize,
+            grid.options.paginationCurrentPage,
+            $scope.sortConfig,
+            grid.columns);
+      });
+
+      // External Sort
+      // http://ui-grid.info/docs/#/tutorial/307_external_sorting
+      $scope.gridApi.core.on.sortChanged($scope, function(grid, sortColumns) {
+        var grid = this.grid;
+        var sortOpts;
+        if (sortColumns && sortColumns.length > 0) {
+          sortOpts = sortColumns[0];
+        } else {
+          sortOpts = null;
+        }
+        // Go to 1st page
+        grid.options.paginationCurrentPage = 1;
+        // Sort Global Config
+        $scope.sortConfig = sortOpts;
+
+        $scope.getPage(
+            grid.options.paginationPageSize,
+            grid.options.paginationCurrentPage,
+            sortOpts,
+            grid.columns);
+      });
+
+      // External Pagination
+      // http://ui-grid.info/docs/#/tutorial/314_external_pagination
+      gridApi.pagination.on.paginationChanged($scope, function (newPage, pageSize) {
+        var grid = this.grid;
+        $scope.gridOptions.pageNumber = newPage;
+        $scope.gridOptions.pageSize = pageSize;
+
+        $scope.getPage(pageSize, newPage,
+            $scope.sortConfig, grid.columns);
+
+      });
+    };
+		// Api Ends
 
    });
 
