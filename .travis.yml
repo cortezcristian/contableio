@@ -5,7 +5,7 @@ os:
 language: node_js
 
 node_js:
-  - '5.7.0'
+  - '4'
 
 script:
   - bash ./scripts/travis-build.sh
