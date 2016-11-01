@@ -9,7 +9,7 @@ fi
 node --version
 npm --version
 
-npm install -g mocha electron-packager
+npm install -g bower@1.7.7 mocha electron-packager
 npm install
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]
 then
