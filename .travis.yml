@@ -5,11 +5,7 @@ os:
 language: node_js
 
 node_js:
-  - '4'
-
-branches:
-  only:
-    - master
+  - '5.7.0'
 
 script:
   - bash ./scripts/travis-build.sh

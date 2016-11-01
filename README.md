@@ -18,6 +18,8 @@ $ npm start
 ### Build
 
 ```
+$ npm install -g electron-rebuild@1.3.0
+$ electron-rebuild
 $ npm run build
 ```
 
