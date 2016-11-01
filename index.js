@@ -6,6 +6,9 @@ const app = electron.app;
 // adds debug features like hotkeys for triggering dev tools and reload
 require('electron-debug')();
 
+// Require DB Connection
+global.sequelize = exports.sequelize = require('./conn.js');
+
 // prevent window being garbage collected
 let mainWindow;
 
@@ -21,7 +24,6 @@ function createMainWindow() {
 		height: 600
 	});
 
-	global.sequelize = exports.sequelize = require('./conn.js');
 
 	win.loadURL(`file://${__dirname}/index.html`);
 	win.on('closed', onClosed);

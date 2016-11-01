@@ -3,7 +3,10 @@
 angular
   .module('contableio')
 	.controller('EmpresasCtrl', function($scope, EmpresasServ){
-		EmpresasServ.create("Sample Empresa");
+
+		EmpresasServ.findAll().then(function(list){
+			console.log(list);
+		});
 	});
 
 })();
