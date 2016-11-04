@@ -1,0 +1,105 @@
+<div class="top-title-bar color-blacked">
+    <h3>
+        <i class="hide fa fa-user fa-fw"></i>
+        {{operatoria}} Empresas
+    </h3>
+    <div class="actions pull-right">
+        <a class="btn btn-primary theme-light" href="#/empresas"><i class="fa fa-th-list"></i> Listado</a>
+    </div>
+</div>
+
+<!-- Form Starts -->
+<div style="padding:10px">
+  <form role="form" method="post" class="container-fluid"
+		name="changeEmpresasForm" ng-submit="save(changeEmpresasForm)"  novalidate>
+
+		<!-- 1st row starts -->
+		<div class="row">
+			<div class="col-md-8">
+
+			<!-- campo nombre -->
+			<div class="form-group" ng-class="{ 'has-error': changeEmpresasForm.nombre.$invalid && changeEmpresasForm.nombre.$dirty }">
+					<label for="nombre" class="label-control"><b>Nombre:</b></label>
+					<input type="text" ng-model="nombres.nombre" name="nombre" id="nombre" class="form-control" minlength="6" required autofocus />
+					<div class="validation text-danger"
+							 ng-messages="changeEmpresasForm.nombre.$error"
+							 ng-if="changeEmpresasForm.nombre.$touched || changeEmpresasForm.$submitted">
+							<div ng-message="required" ng-show="changeEmpresasForm.nombre.$error.required">Este campo es requerido</div>
+							<div ng-message="minlength" ng-show="changeEmpresasForm.nombre.$error.minlength">El nombre debe tener al menos 6 caracteres</div>
+					</div>
+			</div>
+			<!-- fin campo nombre -->
+
+			</div>
+			<div class="col-md-8">
+
+			<!-- campo fecha_inicio -->
+			<div class="form-group" ng-class="{ 'has-error': changeEmpresasForm.fecha_inicio.$invalid && changeEmpresasForm.fecha_inicio.$dirty }">
+					<label for="fecha_inicio" class="label-control"> Fecha Inicio:</label>
+					<pre class="hide">{{ empresas.fecha_inicio | json }}</pre>
+					<input type="text" ng-model="empresas.fecha_inicio" name="fecha_inicio" id="fecha_inicio" class="form-control"
+						 datetimepicker
+						 datetimepicker-options="{{ dtpoptions }}"
+						 />
+					<div class='xinput-group date'>
+						<!--
+						<span class="input-group-addon">
+								<span class="glyph glyph-calendar-mirrored"></span>
+						</span>
+						-->
+					</div>
+					<div class="validation text-danger"
+							 ng-messages="changeEmpresasForm.fecha_inicio.$error"
+							 ng-if="changeEmpresasForm.fecha_inicio.$touched || changeEmpresasForm.$submitted">
+							<div ng-message="required" ng-show="changeEmpresasForm.fecha_inicio.$error.required">Este campo es requerido</div>
+							<div ng-message="minlength" ng-show="changeEmpresasForm.fecha_inicio.$error.minlength">El fecha_inicio debe tener al menos 6 caracteres</div>
+					</div>
+			</div>
+			<!-- fin campo fecha_inicio -->
+
+			</div>
+			<div class="col-md-8">
+
+			<!-- campo cond_iva -->
+			<div class="form-group" ng-class="{ 'has-error': changeEmpresasForm.cond_iva.$invalid && changeEmpresasForm.cond_iva.$dirty }">
+					<label for="cond_iva" class="label-control">Cond. IVA:</label>
+					<select ng-model="empresas.cond_iva" name="cond_iva" id="cond_iva" class="form-control">
+						<option value=""></option>
+						<option value="Responsable Inscripto">Responsable Inscripto</option>
+						<option value="Monotributista">Monotributista</option>
+						<option value="Excento">Excento</option>
+					</select>
+					<div class="validation text-danger"
+							 ng-messages="changeEmpresasForm.cond_iva.$error"
+							 ng-if="changeEmpresasForm.cond_iva.$touched || changeEmpresasForm.$submitted">
+							<div ng-message="required" ng-show="changeEmpresasForm.cond_iva.$error.required">Este campo es requerido</div>
+							<div ng-message="minlength" ng-show="changeEmpresasForm.cond_iva.$error.minlength">El cond_iva debe tener al menos 6 caracteres</div>
+					</div>
+			</div>
+			<!-- fin campo cond_iva -->
+
+			</div>
+
+		</div>
+		<!-- 1st row ends -->
+
+
+
+    <!-- Last row starts -->
+    <div class="row">
+
+      <div class="form-group top-title-bar inner">
+
+          <a href="#/crud/empresas" ng-click="cancelar($event);" class="btn btn-default">Cancelar</a>
+
+          <button type="submit" class="btn btn-primary" ng-disabled="changeEmpresasForm.$invalid">Guardar</button>
+      </div>
+    </div>
+    <!-- Last row ends -->
+      <!--
+      <pre>changeEmpresasForm.$error: {{  changeEmpresasForm.$error | json }}</pre>
+      <pre>changeEmpresasForm: {{  changeEmpresasForm | json }}</pre>
+      -->
+  </form>
+</div>
+<!-- Form Ends -->

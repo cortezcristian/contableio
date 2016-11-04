@@ -27,6 +27,18 @@ angular
 				url: '/empresas',
 				controller: 'EmpresasCtrl',
 				templateUrl: 'views/empresas.html'
+			})
+			.state({
+				name: 'empresas-new',
+				url: '/empresas-new',
+				controller: 'EmpresasNewCtrl',
+				templateUrl: 'views/empresas-new.html'
+			})
+			.state({
+				name: 'empresas-edit',
+				url: '/empresas-edit',
+				controller: 'EmpresasEditCtrl',
+				templateUrl: 'views/empresas-edit.html'
 			});
 		$urlRouterProvider.otherwise('/empresas');
 	})
