@@ -126,3 +126,14 @@ body .btn-popup {
 body a[ng-click] {
   cursor: pointer;
 }
+
+/** Override weird styles **/
+
+input.form-control, textarea.form-control {
+	margin-bottom: 5px !important;
+}
+
+.form-con {
+	padding: 20px 0 15px 0;
+}
+
