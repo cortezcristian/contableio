@@ -131,6 +131,7 @@ body a[ng-click] {
 
 input.form-control, textarea.form-control {
 	margin-bottom: 5px !important;
+	max-width: 368px !important;
 }
 
 .form-con {

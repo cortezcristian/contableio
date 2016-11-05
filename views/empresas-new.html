@@ -20,12 +20,12 @@
 			<!-- campo nombre -->
 			<div class="form-group" ng-class="{ 'has-error': changeEmpresasForm.nombre.$invalid && changeEmpresasForm.nombre.$dirty }">
 					<label for="nombre" class="label-control"><b>Nombre:</b></label>
-					<input type="text" ng-model="nombres.nombre" name="nombre" id="nombre" class="form-control" minlength="6" required autofocus />
+					<input type="text" ng-model="empresa.nombre" name="nombre" id="nombre" class="form-control" minlength="4" required autofocus />
 					<div class="validation text-danger"
 							 ng-messages="changeEmpresasForm.nombre.$error"
 							 ng-if="changeEmpresasForm.nombre.$touched || changeEmpresasForm.$submitted">
 							<div ng-message="required" ng-show="changeEmpresasForm.nombre.$error.required">Este campo es requerido</div>
-							<div ng-message="minlength" ng-show="changeEmpresasForm.nombre.$error.minlength">El nombre debe tener al menos 6 caracteres</div>
+							<div ng-message="minlength" ng-show="changeEmpresasForm.nombre.$error.minlength">El nombre debe tener al menos 4 caracteres</div>
 					</div>
 			</div>
 			<!-- fin campo nombre -->
@@ -37,7 +37,7 @@
 			<div class="form-group" ng-class="{ 'has-error': changeEmpresasForm.fecha_inicio.$invalid && changeEmpresasForm.fecha_inicio.$dirty }">
 					<label for="fecha_inicio" class="label-control"> Fecha Inicio:</label>
 					<pre class="hide">{{ empresas.fecha_inicio | json }}</pre>
-					<input type="text" ng-model="empresas.fecha_inicio" name="fecha_inicio" id="fecha_inicio" class="form-control"
+					<input type="text" ng-model="empresa.fecha_inicio" name="fecha_inicio" id="fecha_inicio" class="form-control"
 						 datetimepicker
 						 datetimepicker-options="{{ dtpoptions }}"
 						 />
@@ -63,7 +63,7 @@
 			<!-- campo cond_iva -->
 			<div class="form-group" ng-class="{ 'has-error': changeEmpresasForm.cond_iva.$invalid && changeEmpresasForm.cond_iva.$dirty }">
 					<label for="cond_iva" class="label-control">Cond. IVA:</label>
-					<select ng-model="empresas.cond_iva" name="cond_iva" id="cond_iva" class="form-control">
+					<select ng-model="empresa.cond_iva" name="cond_iva" id="cond_iva" class="form-control">
 						<option value=""></option>
 						<option value="Responsable Inscripto">Responsable Inscripto</option>
 						<option value="Monotributista">Monotributista</option>
@@ -83,6 +83,113 @@
 		</div>
 		<!-- 1st row ends -->
 
+		<!-- 2nd row starts -->
+		<div class="row">
+			<div class="col-md-8">
+
+			<!-- campo domicilio -->
+			<div class="form-group" ng-class="{ 'has-error': changeEmpresasForm.domicilio.$invalid && changeEmpresasForm.domicilio.$dirty }">
+					<label for="domicilio" class="label-control"><b>Domicilio:</b></label>
+					<input type="text" ng-model="empresa.domicilio" name="domicilio" id="domicilio" class="form-control" minlength="6" required autofocus />
+					<div class="validation text-danger"
+							 ng-messages="changeEmpresasForm.domicilio.$error"
+							 ng-if="changeEmpresasForm.domicilio.$touched || changeEmpresasForm.$submitted">
+							<div ng-message="required" ng-show="changeEmpresasForm.domicilio.$error.required">Este campo es requerido</div>
+							<div ng-message="minlength" ng-show="changeEmpresasForm.domicilio.$error.minlength">El domicilio debe tener al menos 6 caracteres</div>
+					</div>
+			</div>
+			<!-- fin campo domicilio -->
+
+			</div>
+			<div class="col-md-8">
+
+			<!-- campo localidad -->
+			<div class="form-group" ng-class="{ 'has-error': changeEmpresasForm.localidad.$invalid && changeEmpresasForm.localidad.$dirty }">
+					<label for="localidad" class="label-control"><b>Localidad:</b></label>
+					<input type="text" ng-model="empresa.localidad" name="localidad" id="localidad" class="form-control" minlength="6" required autofocus />
+					<div class="validation text-danger"
+							 ng-messages="changeEmpresasForm.localidad.$error"
+							 ng-if="changeEmpresasForm.localidad.$touched || changeEmpresasForm.$submitted">
+							<div ng-message="required" ng-show="changeEmpresasForm.localidad.$error.required">Este campo es requerido</div>
+							<div ng-message="minlength" ng-show="changeEmpresasForm.localidad.$error.minlength">El localidad debe tener al menos 6 caracteres</div>
+					</div>
+			</div>
+			<!-- fin campo localidad -->
+
+			</div>
+			<div class="col-md-8">
+
+			<!-- campo provincia -->
+			<div class="form-group" ng-class="{ 'has-error': changeEmpresasForm.provincia.$invalid && changeEmpresasForm.provincia.$dirty }">
+					<label for="provincia" class="label-control"><b>Provincia:</b></label>
+					<input type="text" ng-model="empresa.provincia" name="provincia" id="provincia" class="form-control" minlength="6" required autofocus />
+					<div class="validation text-danger"
+							 ng-messages="changeEmpresasForm.provincia.$error"
+							 ng-if="changeEmpresasForm.provincia.$touched || changeEmpresasForm.$submitted">
+							<div ng-message="required" ng-show="changeEmpresasForm.provincia.$error.required">Este campo es requerido</div>
+							<div ng-message="minlength" ng-show="changeEmpresasForm.provincia.$error.minlength">El provincia debe tener al menos 6 caracteres</div>
+					</div>
+			</div>
+			<!-- fin campo provincia -->
+
+			</div>
+
+		</div>
+		<!-- 2nd row ends -->
+
+		<!-- 3rd row starts -->
+		<div class="row">
+			<div class="col-md-8">
+
+			<!-- campo cod_postal -->
+			<div class="form-group" ng-class="{ 'has-error': changeEmpresasForm.cod_postal.$invalid && changeEmpresasForm.cod_postal.$dirty }">
+					<label for="cod_postal" class="label-control"><b>Código Postal:</b></label>
+					<input type="text" ng-model="empresa.cod_postal" name="cod_postal" id="cod_postal" class="form-control" minlength="6" required autofocus />
+					<div class="validation text-danger"
+							 ng-messages="changeEmpresasForm.cod_postal.$error"
+							 ng-if="changeEmpresasForm.cod_postal.$touched || changeEmpresasForm.$submitted">
+							<div ng-message="required" ng-show="changeEmpresasForm.cod_postal.$error.required">Este campo es requerido</div>
+							<div ng-message="minlength" ng-show="changeEmpresasForm.cod_postal.$error.minlength">El cod_postal debe tener al menos 6 caracteres</div>
+					</div>
+			</div>
+			<!-- fin campo cod_postal -->
+
+			</div>
+			<div class="col-md-8">
+
+			<!-- campo cuit -->
+			<div class="form-group" ng-class="{ 'has-error': changeEmpresasForm.cuit.$invalid && changeEmpresasForm.cuit.$dirty }">
+					<label for="cuit" class="label-control"><b>Cuit:</b></label>
+					<input type="text" ng-model="empresa.cuit" name="cuit" id="cuit" class="form-control" minlength="6" required autofocus />
+					<div class="validation text-danger"
+							 ng-messages="changeEmpresasForm.cuit.$error"
+							 ng-if="changeEmpresasForm.cuit.$touched || changeEmpresasForm.$submitted">
+							<div ng-message="required" ng-show="changeEmpresasForm.cuit.$error.required">Este campo es requerido</div>
+							<div ng-message="minlength" ng-show="changeEmpresasForm.cuit.$error.minlength">El cuit debe tener al menos 6 caracteres</div>
+					</div>
+			</div>
+			<!-- fin campo cuit -->
+
+			</div>
+			<div class="col-md-8">
+
+			<!-- campo nro_iibb -->
+			<div class="form-group" ng-class="{ 'has-error': changeEmpresasForm.nro_iibb.$invalid && changeEmpresasForm.nro_iibb.$dirty }">
+					<label for="nro_iibb" class="label-control"><b>Nro. Ingresos Brutos:</b></label>
+					<input type="text" ng-model="empresa.nro_iibb" name="nro_iibb" id="nro_iibb" class="form-control" minlength="6" required autofocus />
+					<div class="validation text-danger"
+							 ng-messages="changeEmpresasForm.nro_iibb.$error"
+							 ng-if="changeEmpresasForm.nro_iibb.$touched || changeEmpresasForm.$submitted">
+							<div ng-message="required" ng-show="changeEmpresasForm.nro_iibb.$error.required">Este campo es requerido</div>
+							<div ng-message="minlength" ng-show="changeEmpresasForm.nro_iibb.$error.minlength">El nro_iibb debe tener al menos 6 caracteres</div>
+					</div>
+			</div>
+			<!-- fin campo nro_iibb -->
+
+			</div>
+
+		</div>
+		<!-- 3rd row ends -->
 
 
     <!-- Last row starts -->
@@ -90,7 +197,7 @@
 
       <div class="form-group top-title-bar inner">
 
-          <a href="#/crud/empresas" ng-click="cancelar($event);" class="btn btn-default">Cancelar</a>
+          <a href="#/empresas" ng-click="cancelar($event);" class="btn btn-default">Cancelar</a>
 
           <button type="submit" class="btn btn-primary" ng-disabled="changeEmpresasForm.$invalid">Guardar</button>
       </div>

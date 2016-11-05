@@ -23,7 +23,24 @@ angular
       create : function(data){
         var p = $q.defer();
         EmpresaModel
-          .create({nombre: data || 'Sample Company'})
+          .create(data)
+          .then(function(record){
+             p.resolve(record);
+          })
+          .catch(function (err) {
+            p.reject(err);
+          });
+
+        return p.promise;
+      },
+      remove : function(id){
+        var p = $q.defer();
+        EmpresaModel
+          .destroy({
+						where : {
+							idEmpresa: id
+						}
+					})
           .then(function(record){
              p.resolve(record);
           })

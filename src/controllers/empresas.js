@@ -2,10 +2,12 @@
 
 angular
   .module('contableio')
-  .controller('EmpresasCtrl', function($scope, $timeout, $location, $log, EmpresasServ){
+  .controller('EmpresasCtrl', function($scope, $timeout, $location, $log,
+		$q, toastr, $uibModal, EmpresasServ){
 	  // unselect checked
 	  $scope.multipleSelected=0;
 
+		// Grid Configuration
     $scope.gridOptions = {
       paginationPageSizes: [25, 50, 75, 2000],
       paginationPageSize: 25,
@@ -127,6 +129,50 @@ angular
       });
     };
 		// Api Ends
+
+		// Remove
+		$scope.confirmRemove = function (size) {
+
+			var modalInstance = $uibModal.open({
+				//animation: $scope.animationsEnabled,
+				templateUrl: './views/modal-remove.html',
+				controller: 'ModalRemoveInstanceCtrl',
+				size: size,
+				resolve: {
+					valor: function(){ return 'nombre'; },
+					extra: function(){ return '';},
+					items: function () {
+						return $scope.gridApi.selection.getSelectedRows();
+					}
+				}
+			});
+
+			modalInstance.result.then(function (docs) {
+				var n = 0;
+				var prom = [];
+
+				angular.forEach(docs, function(doc){
+					prom.push(
+						EmpresasServ.remove(doc.idEmpresa).then(function() {
+							var index = $scope.gridOptions.data.indexOf(doc);
+							$log.log("Removed", index);
+							if (index !== -1) {
+									$scope.gridOptions.data.splice(index, 1);
+									n++;
+							}
+						}));
+				});
+
+				$q.all(prom).then(function () {
+						$scope.multipleSelected -= n;
+						var msg = (n>1) ? 'documentos borrados' : 'documento borrado';
+						toastr.info(' '+n+' '+msg, 'Operación Exitosa');
+				});
+
+			}, function () {
+				$log.info('Modal dismissed at: ' + new Date());
+			});
+		};
 
    });
 
