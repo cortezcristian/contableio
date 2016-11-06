@@ -71,9 +71,12 @@ angular
 			 }
 
 			 if(sortOpts && sortOpts != null) {
-				 param.sort = {};
-				 //param.sort[sortOpts.name] = (sortOpts.sort.direction === "asc") ? 1 : 0;
-				 param.sort = ((sortOpts.sort.direction === "asc") ? "" : "-")+sortOpts.name;
+				 param.order = [];
+				 ////param.sort[sortOpts.name] = (sortOpts.sort.direction === "asc") ? 1 : 0;
+				 //param.sort = ((sortOpts.sort.direction === "asc") ? "" : "-")+sortOpts.name;
+				 param.order.push([sortOpts.name , sortOpts.sort.direction]);
+			 } else {
+				 param.order = [];
 			 }
 
 			 if(filterOpts && filterOpts != null) {
