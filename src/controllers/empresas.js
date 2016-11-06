@@ -12,7 +12,7 @@ angular
     param.query = query;
 
     param.limit = 25;
-    param.skip = 0;
+    param.offset = 0;
 
 		// Grid Configuration
     $scope.gridOptions = {
@@ -59,7 +59,7 @@ angular
 		// Get Page
 		$scope.getPage = function(pageSize, newPage, sortOpts, filterOpts) {
 			 param.limit = pageSize;
-			 param.skip = (newPage-1)*param.limit;
+			 param.offset = (newPage-1)*param.limit;
 			 var param_count = {};
 			 // unselect checked
 			 $scope.multipleSelected=0;
