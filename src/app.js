@@ -21,6 +21,21 @@ angular
     'ui.bootstrap'
   ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, uiSelectConfig, datetimepickerProvider, hotkeysProvider, toastrConfig) {
+
+		// Toastr Config
+		angular.extend(toastrConfig, {
+			autoDismiss: false,
+			containerId: 'toast-container',
+			maxOpened: 0,
+			newestOnTop: true,
+			positionClass: 'toast-bottom-right',
+			preventDuplicates: false,
+			preventOpenDuplicates: false,
+			target: 'body'
+		});
+
+
+		// Routes Configs
 		$stateProvider
 			.state({
 				name: 'empresas',

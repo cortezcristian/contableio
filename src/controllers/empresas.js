@@ -49,11 +49,10 @@ angular
 
     // Redirect Edition Form
     $scope.editRow = function (grid, row) {
-			debugger;
       // Redirect to edit
       $timeout(function(){
         $location.path('/empresas-edit/'+row.entity.id);
-      }, 1000)
+      }, 1000);
     };
 
 		// Api Starts
