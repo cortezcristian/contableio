@@ -6,6 +6,13 @@ angular
 		$q, toastr, $uibModal, EmpresasServ){
 	  // unselect checked
 	  $scope.multipleSelected=0;
+		// params
+    var param = { query : '' };
+    var query = '{}';
+    param.query = query;
+
+    param.limit = 25;
+    param.skip = 0;
 
 		// Grid Configuration
     $scope.gridOptions = {
@@ -46,6 +53,68 @@ angular
       console.log(list);
       $scope.gridOptions.data = list;
     });
+
+		// Get Page
+		$scope.getPage = function(pageSize, newPage, sortOpts, filterOpts) {
+			 param.limit = pageSize;
+			 param.skip = (newPage-1)*param.limit;
+			 var param_count = {};
+			 // unselect checked
+			 $scope.multipleSelected=0;
+			 if($scope.gridOptions) {
+					 $timeout(function(){
+							$(".ui-grid-all-selected, .ui-grid-icon-minus-squared").click();
+					 }, 400);
+					 //$scope.gridOptions.$gridScope['allSelected'] = false;
+			 }
+
+			 if(sortOpts && sortOpts != null) {
+				 param.sort = {};
+				 //param.sort[sortOpts.name] = (sortOpts.sort.direction === "asc") ? 1 : 0;
+				 param.sort = ((sortOpts.sort.direction === "asc") ? "" : "-")+sortOpts.name;
+			 }
+
+			 if(filterOpts && filterOpts != null) {
+				 angular.forEach(filterOpts, function(col){
+					 //console.log(col.field, col.filters[0].term)
+					 if(col.filters[0].term){
+						 param[col.field] = '~'+col.filters[0].term;
+						 param_count[col.field] = '~'+col.filters[0].term;
+					 }
+					 if((typeof col.filters[0].term !== "string"
+							 && col.filters[0].term === "")
+							 || col.filters[0].term == null){
+							 // Clear all parameters with empty string
+							 delete param[col.field];
+							 delete param_count[col.field];
+					 }
+				 });
+			 } else if($scope.gridOptions && $scope.gridOptions.columnDefs ) {
+				 angular.forEach($scope.gridOptions.columnDefs, function(col){
+					 // Clear all parameters just in case
+					 delete param[col.field];
+					 delete param_count[col.field];
+				 });
+
+			 }
+
+			 param_count.query = query;
+			 // Count Total
+			 EmpresasServ.count()
+				.then(function(c) {
+				 $scope.gridOptions.totalItems = c;
+				 //$scope.gridOptions.data = Restangular.all("clientes").getList(param).$object;
+			 });
+			 /*
+			 $http.get($rootScope.config.app_api+'clientes/count', {params: param_count})
+				.then(function(response) {
+				 $scope.gridOptions.totalItems = response.data.count;
+				 $scope.gridOptions.data = Restangular.all("clientes").getList(param).$object;
+			 });
+			*/
+		};
+
+   $scope.getPage(25,1, $scope.sortConfig);
 
     // Redirect Edition Form
     $scope.editRow = function (grid, row) {

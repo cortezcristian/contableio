@@ -36,6 +36,20 @@ angular
 
         return p.promise;
       },
+      count : function(query){
+        var p = $q.defer();
+				var query = query ? { where: query } : {};
+        EmpresaModel
+          .count(query)
+          .then(function(c){
+             p.resolve(c);
+          })
+          .catch(function (err) {
+            p.reject(err);
+          });
+
+        return p.promise;
+      },
       create : function(data){
         var p = $q.defer();
         EmpresaModel
