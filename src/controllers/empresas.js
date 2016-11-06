@@ -3,10 +3,10 @@
 angular
   .module('contableio')
   .controller('EmpresasCtrl', function($scope, $timeout, $location, $log,
-		$q, toastr, $uibModal, EmpresasServ){
-	  // unselect checked
-	  $scope.multipleSelected=0;
-		// params
+    $q, toastr, $uibModal, EmpresasServ){
+    // unselect checked
+    $scope.multipleSelected=0;
+    // params
     var param = { where: {}, query : '' };
     var query = '{}';
     param.query = query;
@@ -14,7 +14,7 @@ angular
     param.limit = 25;
     param.offset = 0;
 
-		// Grid Configuration
+    // Grid Configuration
     $scope.gridOptions = {
       paginationPageSizes: [25, 50, 75, 2000],
       paginationPageSize: 25,
@@ -49,88 +49,88 @@ angular
     };
 
     // Get the Info
-		/*
+    /*
     EmpresasServ.findAll().then(function(list){
       console.log(list);
       $scope.gridOptions.data = list;
     });
-		*/
+    */
 
-		// Get Page
-		$scope.getPage = function(pageSize, newPage, sortOpts, filterOpts) {
-			 param.limit = pageSize;
-			 param.offset = (newPage-1)*param.limit;
-			 var param_count = { where: {} };
-			 // unselect checked
-			 $scope.multipleSelected=0;
-			 if($scope.gridOptions) {
-					 $timeout(function(){
-							$(".ui-grid-all-selected, .ui-grid-icon-minus-squared").click();
-					 }, 400);
-					 //$scope.gridOptions.$gridScope['allSelected'] = false;
-			 }
+    // Get Page
+    $scope.getPage = function(pageSize, newPage, sortOpts, filterOpts) {
+       param.limit = pageSize;
+       param.offset = (newPage-1)*param.limit;
+       var param_count = { where: {} };
+       // unselect checked
+       $scope.multipleSelected=0;
+       if($scope.gridOptions) {
+           $timeout(function(){
+              $(".ui-grid-all-selected, .ui-grid-icon-minus-squared").click();
+           }, 400);
+           //$scope.gridOptions.$gridScope['allSelected'] = false;
+       }
 
-			 if(sortOpts && sortOpts != null) {
-				 param.order = [];
-				 ////param.sort[sortOpts.name] = (sortOpts.sort.direction === "asc") ? 1 : 0;
-				 //param.sort = ((sortOpts.sort.direction === "asc") ? "" : "-")+sortOpts.name;
-				 param.order.push([sortOpts.name , sortOpts.sort.direction]);
-			 } else {
-				 param.order = [];
-			 }
+       if(sortOpts && sortOpts != null) {
+         param.order = [];
+         ////param.sort[sortOpts.name] = (sortOpts.sort.direction === "asc") ? 1 : 0;
+         //param.sort = ((sortOpts.sort.direction === "asc") ? "" : "-")+sortOpts.name;
+         param.order.push([sortOpts.name , sortOpts.sort.direction]);
+       } else {
+         param.order = [];
+       }
 
-			 if(filterOpts && filterOpts != null) {
-				 angular.forEach(filterOpts, function(col){
-					 console.log(col.field, col.filters[0].term)
-					 if(col.filters[0].term){
-						 param.where[col.field] = { $like : '%'+col.filters[0].term+'%' };
-						 param_count.where[col.field] = { $like : '%'+col.filters[0].term+'%' };
-						console.log("Adding like... ",  col.field);
-					 }
-					 if((typeof col.filters[0].term !== "string"
-							 && col.filters[0].term === "")
-							 || col.filters[0].term == null
-							 || col.filters[0].term == ""){
-							 console.log("Clearing... ",  col.field);
-							 // Clear all parameters with empty string
-							 delete param.where[col.field];
-							 delete param_count.where[col.field];
-					 }
-				 });
-			 } else if($scope.gridOptions && $scope.gridOptions.columnDefs ) {
-				 angular.forEach($scope.gridOptions.columnDefs, function(col){
-					 // Clear all parameters just in case
-					 if(typeof param.where[col.field] !== 'undefined'){
-					   delete param.where[col.field];
-				   }
+       if(filterOpts && filterOpts != null) {
+         angular.forEach(filterOpts, function(col){
+           console.log(col.field, col.filters[0].term)
+           if(col.filters[0].term){
+             param.where[col.field] = { $like : '%'+col.filters[0].term+'%' };
+             param_count.where[col.field] = { $like : '%'+col.filters[0].term+'%' };
+            console.log("Adding like... ",  col.field);
+           }
+           if((typeof col.filters[0].term !== "string"
+               && col.filters[0].term === "")
+               || col.filters[0].term == null
+               || col.filters[0].term == ""){
+               console.log("Clearing... ",  col.field);
+               // Clear all parameters with empty string
+               delete param.where[col.field];
+               delete param_count.where[col.field];
+           }
+         });
+       } else if($scope.gridOptions && $scope.gridOptions.columnDefs ) {
+         angular.forEach($scope.gridOptions.columnDefs, function(col){
+           // Clear all parameters just in case
+           if(typeof param.where[col.field] !== 'undefined'){
+             delete param.where[col.field];
+           }
 
-					 if(typeof param_count.where[col.field] !== 'undefined'){
-						delete param_count.where[col.field];
-				   }
+           if(typeof param_count.where[col.field] !== 'undefined'){
+            delete param_count.where[col.field];
+           }
 
-				 });
+         });
 
-			 }
+       }
 
-			 // Count Total
-			 EmpresasServ.count(param_count.where)
-				.then(function(total) {
-				 $scope.gridOptions.totalItems = total;
-				 //$scope.gridOptions.data = Restangular.all("clientes").getList(param).$object;
-				 // Get the Info
-				 EmpresasServ.findAndCountAll(param).then(function(results){
-					 console.log(">>", results.count, results.rows);
-					 $scope.gridOptions.data = results.rows;
-				 });
-			 });
-			 /*
-			 $http.get($rootScope.config.app_api+'clientes/count', {params: param_count})
-				.then(function(response) {
-				 $scope.gridOptions.totalItems = response.data.count;
-				 $scope.gridOptions.data = Restangular.all("clientes").getList(param).$object;
-			 });
-			*/
-		};
+       // Count Total
+       EmpresasServ.count(param_count.where)
+        .then(function(total) {
+         $scope.gridOptions.totalItems = total;
+         //$scope.gridOptions.data = Restangular.all("clientes").getList(param).$object;
+         // Get the Info
+         EmpresasServ.findAndCountAll(param).then(function(results){
+           console.log(">>", results.count, results.rows);
+           $scope.gridOptions.data = results.rows;
+         });
+       });
+       /*
+       $http.get($rootScope.config.app_api+'clientes/count', {params: param_count})
+        .then(function(response) {
+         $scope.gridOptions.totalItems = response.data.count;
+         $scope.gridOptions.data = Restangular.all("clientes").getList(param).$object;
+       });
+      */
+    };
 
    $scope.getPage(25,1, $scope.sortConfig);
 
@@ -142,7 +142,7 @@ angular
       }, 1000);
     };
 
-		// Api Starts
+    // Api Starts
    $scope.gridOptions.onRegisterApi = function(gridApi){
       //set gridApi on scope
       $scope.gridApi = gridApi;
@@ -216,51 +216,51 @@ angular
 
       });
     };
-		// Api Ends
+    // Api Ends
 
-		// Remove
-		$scope.confirmRemove = function (size) {
+    // Remove
+    $scope.confirmRemove = function (size) {
 
-			var modalInstance = $uibModal.open({
-				//animation: $scope.animationsEnabled,
-				templateUrl: './views/modal-remove.html',
-				controller: 'ModalRemoveInstanceCtrl',
-				size: size,
-				resolve: {
-					valor: function(){ return 'nombre'; },
-					extra: function(){ return '';},
-					items: function () {
-						return $scope.gridApi.selection.getSelectedRows();
-					}
-				}
-			});
+      var modalInstance = $uibModal.open({
+        //animation: $scope.animationsEnabled,
+        templateUrl: './views/modal-remove.html',
+        controller: 'ModalRemoveInstanceCtrl',
+        size: size,
+        resolve: {
+          valor: function(){ return 'nombre'; },
+          extra: function(){ return '';},
+          items: function () {
+            return $scope.gridApi.selection.getSelectedRows();
+          }
+        }
+      });
 
-			modalInstance.result.then(function (docs) {
-				var n = 0;
-				var prom = [];
+      modalInstance.result.then(function (docs) {
+        var n = 0;
+        var prom = [];
 
-				angular.forEach(docs, function(doc){
-					prom.push(
-						EmpresasServ.remove(doc.id).then(function() {
-							var index = $scope.gridOptions.data.indexOf(doc);
-							$log.log("Removed", index);
-							if (index !== -1) {
-									$scope.gridOptions.data.splice(index, 1);
-									n++;
-							}
-						}));
-				});
+        angular.forEach(docs, function(doc){
+          prom.push(
+            EmpresasServ.remove(doc.id).then(function() {
+              var index = $scope.gridOptions.data.indexOf(doc);
+              $log.log("Removed", index);
+              if (index !== -1) {
+                  $scope.gridOptions.data.splice(index, 1);
+                  n++;
+              }
+            }));
+        });
 
-				$q.all(prom).then(function () {
-						$scope.multipleSelected -= n;
-						var msg = (n>1) ? 'documentos borrados' : 'documento borrado';
-						toastr.info(' '+n+' '+msg, 'Operación Exitosa');
-				});
+        $q.all(prom).then(function () {
+            $scope.multipleSelected -= n;
+            var msg = (n>1) ? 'documentos borrados' : 'documento borrado';
+            toastr.info(' '+n+' '+msg, 'Operación Exitosa');
+        });
 
-			}, function () {
-				$log.info('Modal dismissed at: ' + new Date());
-			});
-		};
+      }, function () {
+        $log.info('Modal dismissed at: ' + new Date());
+      });
+    };
 
    });
 
