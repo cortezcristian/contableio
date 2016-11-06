@@ -7,7 +7,7 @@ angular
 	  // unselect checked
 	  $scope.multipleSelected=0;
 		// params
-    var param = { query : '' };
+    var param = { where: {}, query : '' };
     var query = '{}';
     param.query = query;
 
@@ -60,7 +60,7 @@ angular
 		$scope.getPage = function(pageSize, newPage, sortOpts, filterOpts) {
 			 param.limit = pageSize;
 			 param.offset = (newPage-1)*param.limit;
-			 var param_count = {};
+			 var param_count = { where: {} };
 			 // unselect checked
 			 $scope.multipleSelected=0;
 			 if($scope.gridOptions) {
@@ -78,31 +78,38 @@ angular
 
 			 if(filterOpts && filterOpts != null) {
 				 angular.forEach(filterOpts, function(col){
-					 //console.log(col.field, col.filters[0].term)
+					 console.log(col.field, col.filters[0].term)
 					 if(col.filters[0].term){
-						 param[col.field] = '~'+col.filters[0].term;
-						 param_count[col.field] = '~'+col.filters[0].term;
+						 param.where[col.field] = { $like : '%'+col.filters[0].term+'%' };
+						 param_count.where[col.field] = { $like : '%'+col.filters[0].term+'%' };
+						console.log("Adding like... ",  col.field);
 					 }
 					 if((typeof col.filters[0].term !== "string"
 							 && col.filters[0].term === "")
 							 || col.filters[0].term == null){
+							 console.log("Clearing... ",  col.field);
 							 // Clear all parameters with empty string
-							 delete param[col.field];
-							 delete param_count[col.field];
+							 delete param.where[col.field];
+							 delete param_count.where[col.field];
 					 }
 				 });
 			 } else if($scope.gridOptions && $scope.gridOptions.columnDefs ) {
 				 angular.forEach($scope.gridOptions.columnDefs, function(col){
 					 // Clear all parameters just in case
-					 delete param[col.field];
-					 delete param_count[col.field];
+					 if(typeof param.where[col.field] !== 'undefined'){
+					   delete param.where[col.field];
+				   }
+
+					 if(typeof param_count.where[col.field] !== 'undefined'){
+						delete param_count.where[col.field];
+				   }
+
 				 });
 
 			 }
 
-			 param_count.query = query;
 			 // Count Total
-			 EmpresasServ.count()
+			 EmpresasServ.count(param_count.where)
 				.then(function(c) {
 				 $scope.gridOptions.totalItems = c;
 				 //$scope.gridOptions.data = Restangular.all("clientes").getList(param).$object;
