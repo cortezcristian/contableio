@@ -86,7 +86,8 @@ angular
 					 }
 					 if((typeof col.filters[0].term !== "string"
 							 && col.filters[0].term === "")
-							 || col.filters[0].term == null){
+							 || col.filters[0].term == null
+							 || col.filters[0].term == ""){
 							 console.log("Clearing... ",  col.field);
 							 // Clear all parameters with empty string
 							 delete param.where[col.field];
@@ -110,8 +111,8 @@ angular
 
 			 // Count Total
 			 EmpresasServ.count(param_count.where)
-				.then(function(c) {
-				 $scope.gridOptions.totalItems = c;
+				.then(function(total) {
+				 $scope.gridOptions.totalItems = total;
 				 //$scope.gridOptions.data = Restangular.all("clientes").getList(param).$object;
 				 // Get the Info
 				 EmpresasServ.findAndCountAll(param).then(function(results){
