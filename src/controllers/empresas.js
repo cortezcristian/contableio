@@ -49,10 +49,12 @@ angular
     };
 
     // Get the Info
+		/*
     EmpresasServ.findAll().then(function(list){
       console.log(list);
       $scope.gridOptions.data = list;
     });
+		*/
 
 		// Get Page
 		$scope.getPage = function(pageSize, newPage, sortOpts, filterOpts) {
@@ -104,6 +106,11 @@ angular
 				.then(function(c) {
 				 $scope.gridOptions.totalItems = c;
 				 //$scope.gridOptions.data = Restangular.all("clientes").getList(param).$object;
+				 // Get the Info
+				 EmpresasServ.findAndCountAll(param).then(function(results){
+					 console.log(">>", results.count, results.rows);
+					 $scope.gridOptions.data = results.rows;
+				 });
 			 });
 			 /*
 			 $http.get($rootScope.config.app_api+'clientes/count', {params: param_count})

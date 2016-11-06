@@ -50,6 +50,20 @@ angular
 
         return p.promise;
       },
+			findAndCountAll : function(params) {
+        var p = $q.defer();
+        EmpresaModel
+          .findAndCountAll(params)
+          .then(function(results){
+             p.resolve(results);
+          })
+          .catch(function (err) {
+            p.reject(err);
+          });
+
+        return p.promise;
+
+			},
       create : function(data){
         var p = $q.defer();
         EmpresaModel
