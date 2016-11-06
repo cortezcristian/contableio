@@ -36,9 +36,9 @@ angular
 			})
 			.state({
 				name: 'empresas-edit',
-				url: '/empresas-edit',
+				url: '/empresas-edit/:id',
 				controller: 'EmpresasEditCtrl',
-				templateUrl: 'views/empresas-edit.html'
+				templateUrl: 'views/empresas-new.html'
 			});
 		$urlRouterProvider.otherwise('/empresas');
 	})

@@ -21,6 +21,7 @@ angular
       enableFiltering: true,
       columnDefs: [
         /* fields start */
+        { field: 'id' },
         { field: 'nombre' },
         { field: 'domicilio' },
         { field: 'cod_postal' },
@@ -48,9 +49,10 @@ angular
 
     // Redirect Edition Form
     $scope.editRow = function (grid, row) {
+			debugger;
       // Redirect to edit
       $timeout(function(){
-        $location.path('/empresas-edit/'+row.entity._id);
+        $location.path('/empresas-edit/'+row.entity.id);
       }, 1000)
     };
 
@@ -153,7 +155,7 @@ angular
 
 				angular.forEach(docs, function(doc){
 					prom.push(
-						EmpresasServ.remove(doc.idEmpresa).then(function() {
+						EmpresasServ.remove(doc.id).then(function() {
 							var index = $scope.gridOptions.data.indexOf(doc);
 							$log.log("Removed", index);
 							if (index !== -1) {

@@ -9,7 +9,7 @@ if(typeof sequelize === 'undefined') {
 }
 
 var Empresa = sequelize.define('Empresa', {
-	idEmpresa : { type            : Sequelize.INTEGER, primaryKey : true, autoIncrement : true },
+	id				 : { type            : Sequelize.INTEGER, primaryKey : true, autoIncrement : true },
   nombre     : Sequelize.STRING,
   domicilio  : Sequelize.STRING,
   cod_postal : Sequelize.STRING,

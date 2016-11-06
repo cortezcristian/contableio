@@ -20,10 +20,42 @@ angular
 
         return p.promise;
       },
+      findById : function(id){
+        var p = $q.defer();
+        EmpresaModel
+          .findOne({
+						where: { id: id },
+						raw: true
+					})
+          .then(function(list){
+             p.resolve(list);
+          })
+          .catch(function (err) {
+            p.reject(err);
+          });
+
+        return p.promise;
+      },
       create : function(data){
         var p = $q.defer();
         EmpresaModel
           .create(data)
+          .then(function(record){
+             p.resolve(record);
+          })
+          .catch(function (err) {
+            p.reject(err);
+          });
+
+        return p.promise;
+      },
+      update : function(data){
+        var p = $q.defer();
+        EmpresaModel
+          .update(
+						data,
+						{	where : { id: data.id } }
+					)
           .then(function(record){
              p.resolve(record);
           })
@@ -38,7 +70,7 @@ angular
         EmpresaModel
           .destroy({
 						where : {
-							idEmpresa: id
+							id: id
 						}
 					})
           .then(function(record){
